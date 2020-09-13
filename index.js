@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const replace = require('replace-in-file');
 const fs = require('fs');
 
@@ -51,8 +53,8 @@ const locations = [
     },
     {
         files: `./ios/${packageJson.name}.xcodeproj/project.pbxproj`,
-        from: new RegExp('MARKETING_VERSION = "[0-9, .]+"', 'g'),
-        to: `MARKETING_VERSION = "${version.raw}"`,
+        from: new RegExp('MARKETING_VERSION = [0-9, .]+', 'g'),
+        to: `MARKETING_VERSION = ${version.raw}`,
     },
     {
         files: `./package.json`,

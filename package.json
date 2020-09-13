@@ -5,6 +5,9 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"bin": {
+		"setVersion": "./index.js"
+	},
 	"author": "Tom McIntosh",
 	"license": "MIT",
 	"dependencies": {
