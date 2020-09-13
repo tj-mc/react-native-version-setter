@@ -13,8 +13,8 @@ package.json "version"
 ```
 
 ## Install
+Install in your project:
 ```npm i react-native-version-setter```
-
 ## Usage
 ```
 $: npm run setVersion 1.2.0
@@ -25,7 +25,7 @@ $: npm run setVersion 1.2.0
 ```
 
 ## Freeform Versioning
-react-native-version-setter does not impose restrictions on versioning style. 
+RNVS does not impose restrictions on versioning style. 
 Feel free set your version numbers in whatever format works for you. For example, Date-based versioning:
 ```
 $: npm run setVersion 1.20200909.1
@@ -35,6 +35,9 @@ In most cases it makes sense to use conventional [semantic versioning.](https://
 
 ## Options
 `-d`: Run with debug logging.
+
+## Android versionName
+
 
 ## Note 
 - Compatible with iOS projects using Xcode 11+
