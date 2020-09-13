@@ -1,5 +1,6 @@
 {
 	"name": "react-native-version-setter",
+	"version": "1.0.0",
 	"description": "Update your app version with a single command.",
 	"main": "index.js",
 	"scripts": {
