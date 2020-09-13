@@ -1,6 +1,7 @@
 # react-native-version-setter
+![](./rnvs.png)
+![licence](https://img.shields.io/npm/l/react-native-version-setter?style=flat-square)
 
-![rnvs logo](./rnvs.png)
 The simplest way to update your app version.
 
 Will auto update:
