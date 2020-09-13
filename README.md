@@ -1,4 +1,4 @@
-#react-native-version-setter
+# react-native-version-setter
 
 ![rnvs logo](./rnvs.png)
 The simplest way to update your app version.
