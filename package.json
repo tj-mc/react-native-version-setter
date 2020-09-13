@@ -1,0 +1,13 @@
+{
+	"name": "react-native-version-setter",
+	"description": "Update your app version with a single command.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Tom McIntosh",
+	"license": "MIT",
+	"dependencies": {
+		"replace-in-file": "^6.1.0"
+	}
+}
