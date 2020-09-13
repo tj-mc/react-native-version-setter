@@ -29,7 +29,7 @@ const version = {
     raw: process.argv[2]
 }
 
-version.raw || die(`Please provide a version number. ${emokie.warning}`);
+version.raw || die(`Please provide a version number. ${emoji.warning}`);
 version.valid.test(version.raw) || die(`Your version number should contain only digits and periods. ${emoji.warning} `)
 version.stripped = version.raw.split('.').join('')
 
