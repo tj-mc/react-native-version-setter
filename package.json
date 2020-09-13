@@ -1,6 +1,6 @@
 {
 	"name": "react-native-version-setter",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Update your app version with a single command.",
 	"homepage": "https://www.github.com/tj-mc/react-native-version-setter",
 	"main": "index.js",
@@ -10,9 +10,19 @@
 	"bin": {
 		"setVersion": "./index.js"
 	},
+	"keywords": [
+		"version",
+		"setVersion",
+		"javascript",
+		"react-native",
+		"setter",
+		"react",
+		"semver",
+		"rn-version"
+	],
 	"author": "Tom McIntosh",
 	"license": "MIT",
 	"dependencies": {
-		"replace-in-file": "^6.1.0"
+		"replace-in-file": "6.1.0"
 	}
 }
