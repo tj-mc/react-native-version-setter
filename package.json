@@ -3,9 +3,9 @@
 	"version": "1.0.5",
 	"description": "Update your app version with a single command.",
 	"homepage": "https://www.github.com/tj-mc/react-native-version-setter",
-	"main": "index.js",
+	"main": "lib/index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "babel src -d lib"
 	},
 	"bin": {
 		"setVersion": "./index.js"
@@ -24,5 +24,10 @@
 	"license": "MIT",
 	"dependencies": {
 		"replace-in-file": "6.1.0"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.11.6",
+		"@babel/core": "^7.11.6",
+		"@babel/preset-env": "^7.11.5"
 	}
 }
