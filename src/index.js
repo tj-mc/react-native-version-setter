@@ -1,44 +1,44 @@
 #!/usr/bin/env node
+import {out, die, cliArgumentExists} from "./process";
+import {emoji} from "./emoji";
+import {readPackageJson} from "./helpers";
 
 const replace = require('replace-in-file');
-const fs = require('fs');
 
-const out = message => console.log(`[RNVS] ${message}`)
-const die = message => { out(message); process.exit(1); }
-const getArg = flag => process.argv.find(arg => arg === flag)
+const packageJson = readPackageJson()
+packageJson || die('Could not read package.json.')
 
-const emoji = {
-    warning: String.fromCodePoint(0x1F6D1),
-    check: String.fromCodePoint(0x2705),
-    sparkle: String.fromCodePoint(0x2728)
-}
-
-const prefs = {
-    debugLog: {
-        flag: '-d',
-        set: null
+/**
+ * All possible command line flags
+ */
+const commandLineFlags = [
+    {
+        name: 'debugLog',
+        argument: '-d',
+        set: false
     }
-}
+]
 
-Object.keys(prefs).forEach(key => {
-    prefs[key].set = getArg(prefs[key].flag)
+/**
+ * Loop through the commandLineFlags array,
+ * searching for a symbol in the command line
+ * call
+ */
+commandLineFlags.forEach(flag => {
+    flag.set = cliArgumentExists(flag.argument)
 })
 
 const version = {
-    valid: /^[0-9, .]+[0-9]+$/,
-    raw: process.argv[2]
+    validRegEx: /^[0-9, .]+[0-9]+$/,  // Test to validate version strings
+                                      // Cannot end or start with .
+                                      // Must be only digit and .
+
+    raw: process.argv[2]              // The raw input version string
 }
 
 version.raw || die(`Please provide a version number. ${emoji.warning}`);
-version.valid.test(version.raw) || die(`Your version number should contain only digits and periods. ${emoji.warning} `)
+version.validRegEx.test(version.raw) || die(`Your version number should contain only digits and periods. ${emoji.warning} `)
 version.stripped = version.raw.split('.').join('')
-
-let packageJson;
-try {
-    packageJson = JSON.parse(String(fs.readFileSync('package.json')))
-} catch (e) {
-    die(`Could not read package.json: ${e}`)
-}
 
 const locations = [
     {
@@ -74,13 +74,12 @@ try {
 
         if (result[0]?.hasChanged) {
             changes++
-            prefs.debugLog.set && out(`Set ${location.files} to:  ${location.to} `)
+            commandLineFlags.debugLog.set && out(`Set ${location.files} to:  ${location.to} `)
         } else {
-            prefs.debugLog.set && out(`${location.files} was not changed.`)
+            commandLineFlags.debugLog.set && out(`${location.files} was not changed.`)
         }
 
     })
-
 
     if (locations.length > changes && changes !== 0) {
         out(`One or more files were not changed. Run with -d flag for debug log. ${emoji.warning}` )
