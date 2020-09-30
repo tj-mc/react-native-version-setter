@@ -33,6 +33,9 @@ $: npm run setVersion 1.20200909.1
 ```
 In most cases it makes sense to use conventional [semantic versioning.](https://en.wikipedia.org/wiki/Software_versioning)
 
+### Dashes are not valid
+Due to iOS not supporting dashes in versions, it's not possible to set a version like `0.1.0-rc0`.
+
 ## Options
 `-d`: Run with debug logging.
 
