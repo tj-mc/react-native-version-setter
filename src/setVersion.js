@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-import {out, die, cliArgumentExists} from "./process";
-import {emoji} from "./emoji";
-import {readPackageJson} from "./readPackageJson";
-import {createLocations} from "./createLocations";
+import {out, die, cliArgumentExists} from "./process.js";
+import {emoji} from "./emoji.js";
+import {readPackageJson} from "./readPackageJson.js";
+import {createLocations} from "./createLocations.js";
 
 const replace = require('replace-in-file');
 
