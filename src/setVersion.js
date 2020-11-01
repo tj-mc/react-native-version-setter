@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import {out, die, cliArgumentExists} from "./process";
 import {emoji} from "./emoji";
-import {readPackageJson} from "./helpers";
+import {readPackageJson} from "./readPackageJson";
+import {createLocations} from "./createLocations";
 
 const replace = require('replace-in-file');
 
@@ -42,37 +43,13 @@ const version = {
 /**
  * Error messages
  */
-version.raw || die(`Please provide a version number. ${emoji.warning}`);
+version.raw || die(`Please provide a version number. ${emoji.warning}`)
 version.validRegEx.test(version.raw) || die(`Your version number should contain only digits and periods. ${emoji.warning} `)
 version.stripped = version.raw.split('.').join('')
 
-/**
- * All locations to check and set versions
- */
-const locations = [
-    {
-        files: './android/app/build.gradle',
-        from: new RegExp('versionCode [0-9]+', 'g'),
-        to: `versionCode ${version.stripped}`,
-    },
-    {
-        files: './android/app/build.gradle',
-        from: new RegExp('versionName "[0-9, .]+"', 'g'),
-        to: `versionName "${version.raw}"`,
-    },
-    {
-        files: `./ios/${packageJson.name}.xcodeproj/project.pbxproj`,
-        from: new RegExp('MARKETING_VERSION = [0-9, .]+', 'g'),
-        to: `MARKETING_VERSION = ${version.raw}`,
-    },
-    {
-        files: `./package.json`,
-        from: new RegExp('"version": ".+"'),
-        to: `"version": "${version.raw}"`,
-    },
-]
+const locations = createLocations({version, packageJson})
 
-let changes = 0;
+let changes = 0
 
 try {
     locations.forEach(location => {

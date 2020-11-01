@@ -8,7 +8,8 @@
 		"build": "babel src -d lib"
 	},
 	"bin": {
-		"setVersion": "./lib/setVersion.js"
+		"setVersion": "./lib/setVersion.js",
+		"getVersion": "./lib/getVersion.js"
 	},
 	"keywords": [
 		"version",
