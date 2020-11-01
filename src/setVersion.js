@@ -12,21 +12,20 @@ packageJson || die('Could not read package.json.')
 /**
  * All possible command line flags
  */
-const commandLineFlags = [
-    {
-        name: 'debugLog',
+const commandLineFlags = {
+    debugLog: {
         argument: '-d',
         set: false
     }
-]
+}
 
 /**
  * Loop through the commandLineFlags array,
  * searching for a symbol in the command line
  * call
  */
-commandLineFlags.forEach(flag => {
-    flag.set = cliArgumentExists(flag.argument)
+Object.keys(commandLineFlags).forEach(key => {
+    commandLineFlags[key].set = cliArgumentExists(commandLineFlags[key].argument)
 })
 
 /**
@@ -68,7 +67,7 @@ try {
     })
 
     if (locations.length > changes && changes !== 0) {
-        out(`One or more files were not changed. Run with -d flag for debug log. ${emoji.warning}` )
+        out(`One or more files were not changed. Run with -d flag for debug log. ${emoji.warning}`)
     } else if (changes === 0) {
         if (packageJson.version === version.raw) {
             out(`Version is already ${version.raw} ${emoji.warning}  `)
