@@ -28,6 +28,9 @@ commandLineFlags.forEach(flag => {
     flag.set = cliArgumentExists(flag.argument)
 })
 
+/**
+ * Check for valid version strings.
+ */
 const version = {
     validRegEx: /^[0-9, .]+[0-9]+$/,  // Test to validate version strings
                                       // Cannot end or start with .
@@ -36,10 +39,16 @@ const version = {
     raw: process.argv[2]              // The raw input version string
 }
 
+/**
+ * Error messages
+ */
 version.raw || die(`Please provide a version number. ${emoji.warning}`);
 version.validRegEx.test(version.raw) || die(`Your version number should contain only digits and periods. ${emoji.warning} `)
 version.stripped = version.raw.split('.').join('')
 
+/**
+ * All locations to check and set versions
+ */
 const locations = [
     {
         files: './android/app/build.gradle',
