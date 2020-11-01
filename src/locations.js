@@ -1,3 +1,0 @@
-import {version} from "./index";
-
-
