@@ -47,7 +47,7 @@ version.raw || die(`Please provide a version number. ${emoji.warning}`)
 version.validRegEx.test(version.raw) || die(`Your version number should contain only digits and periods. ${emoji.warning} `)
 version.stripped = version.raw.split('.').join('')
 
-const locations = createLocations({version, packageJson})
+const locations = createLocations(version, packageJson)
 
 let changes = 0
 
