@@ -1,6 +1,6 @@
 {
 	"name": "@andrioid/react-native-version-setter",
-	"version": "2.0.0",
+	"version": "2.0.4",
 	"description": "Fork. Update your app version with a single command.",
 	"homepage": "https://www.github.com/tj-mc/react-native-version-setter",
 	"main": "lib/index.js",
