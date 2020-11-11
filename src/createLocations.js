@@ -11,8 +11,8 @@ export const createLocations = (version, packageJson, platform = null) => {
         },
         {
             files: './android/app/build.gradle',
-            from: new RegExp('versionName "[0-9, .]+"', 'g'),
-            to: `versionName "${version.raw}"`,
+            from: new RegExp('^versionName ([0-9, .])+([-+][a-z0-9]+)?$'),
+            to: `versionName ${version.raw}`,
             platform: constants.platform.android
         },
         {

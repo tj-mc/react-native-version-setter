@@ -8,5 +8,5 @@ export const die = message => {
 }
 
 export const cliArgumentExists = flag => {
-    process.argv.find(arg => arg === flag)
+    return !!process.argv.find(arg => arg === flag)
 }
