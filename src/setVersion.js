@@ -16,6 +16,10 @@ const commandLineFlags = {
     debugLog: {
         argument: '-d',
         set: false
+    },
+    dryRun: {
+        argument: '-r',
+        set: false
     }
 }
 
@@ -28,23 +32,38 @@ Object.keys(commandLineFlags).forEach(key => {
     commandLineFlags[key].set = cliArgumentExists(commandLineFlags[key].argument)
 })
 
+
+
 /**
  * Check for valid version strings.
  */
 const version = {
-    validRegEx: /^[0-9, .]+[0-9]+$/,  // Test to validate version strings
-                                      // Cannot end or start with .
-                                      // Must be only digit and .
-
+    validRegEx: /^([0-9, .]+)([-+][a-z0-9]+)?$/,
+                                      // Semantic Versioning 2.0
     raw: process.argv[2]              // The raw input version string
+}
+
+/**
+ * Replacer function to strip beta/rc from ios versions
+ */
+
+function replacer(match, p1, p2, offset, string) {
+    // just strips away the second match
+    return p1
 }
 
 /**
  * Error messages
  */
 version.raw || die(`Please provide a version number. ${emoji.warning}`)
-version.validRegEx.test(version.raw) || die(`Your version number should contain only digits and periods. ${emoji.warning} `)
-version.stripped = version.raw.split('.').join('')
+version.validRegEx.test(version.raw) || die(`Usage: setVersion <version> [args] ${emoji.warning} `)
+version.core = version.raw.replace(version.validRegEx, replacer)
+version.stripped = version.core.split('.').join('')
+
+if (commandLineFlags.dryRun.set) {
+    console.log(version);
+    die()
+}
 
 const locations = createLocations(version, packageJson)
 

@@ -5,20 +5,20 @@ export const createLocations = (version, packageJson, platform = null) => {
     const allLocations = [
         {
             files: './android/app/build.gradle',
-            from: new RegExp('versionCode [0-9]+', 'g'),
-            to: `versionCode ${version.stripped}`,
-            platform: constants.platform.android
-        },
-        {
-            files: './android/app/build.gradle',
-            from: new RegExp('versionName "[0-9, .]+"', 'g'),
-            to: `versionName "${version.raw}"`,
+            from: [
+                new RegExp('versionCode [0-9]+', 'g'),
+                new RegExp('versionName "([0-9, .])+([-+][a-z0-9]+)?"')
+            ],
+            to: [
+                `versionCode ${version.stripped}`,
+                `versionName "${version.raw}"`
+            ],
             platform: constants.platform.android
         },
         {
             files: `./ios/${packageJson.name}.xcodeproj/project.pbxproj`,
             from: new RegExp('MARKETING_VERSION = [0-9, .]+', 'g'),
-            to: `MARKETING_VERSION = ${version.raw}`,
+            to: `MARKETING_VERSION = ${version.core}`,
             platform: constants.platform.ios
         },
         {
