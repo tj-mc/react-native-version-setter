@@ -62,3 +62,5 @@ so they are stripped out automatically. They will be inserted normal into androi
 Ensure you have opened the generated `.xcodeproj` file at least once. On the first opening, Xcode will create the
 `MARKETING_VERSION` field that holds your app version. Prioed to this, there is nowhere to store the iOS version.
 
+#### Need Help?
+If you're after a new feature that isn't listed on the roadmap, or you're having trouble with this package, please open an issue.
