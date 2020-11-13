@@ -7,6 +7,4 @@ export const die = message => {
     process.exit(1)
 }
 
-export const cliArgumentExists = flag => {
-    return !!process.argv.find(arg => arg === flag)
-}
+export const cliArgumentExists = flag => !!process.argv.find(arg => arg === flag)

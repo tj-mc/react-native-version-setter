@@ -6,6 +6,8 @@ export const readPackageJson = () => {
         packageJson = JSON.parse(String(fs.readFileSync('package.json')))
         if (packageJson) {
             return packageJson
+        } else {
+            throw new Error()
         }
     } catch (e) {
         return null
