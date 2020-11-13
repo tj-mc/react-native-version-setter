@@ -18,7 +18,10 @@
 		"setter",
 		"react",
 		"semver",
-		"rn-version"
+		"rn-version",
+		"react-native-versioning",
+		"rnvs",
+		"react-native-version-setter"
 	],
 	"author": "Tom McIntosh",
 	"license": "MIT",
