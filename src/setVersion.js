@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import {out, die, cliArgumentExists} from "./process.js";
-import {emoji} from "./emoji.js";
 import {readPackageJson} from "./readPackageJson.js";
 import {createLocations} from "./createLocations.js";
+import {constants} from "./constants";
 
 const replace = require('replace-in-file');
 
@@ -44,25 +44,24 @@ const version = {
 }
 
 /**
- * Replacer function to strip beta/rc from ios versions
+ * Replacer function to strip beta/rc from ios versions.
+ * Strips away second match.
  */
+const coreReplacer = (match, p1, p2, offset, string) => p1
 
-function replacer(match, p1, p2, offset, string) {
-    // just strips away the second match
-    return p1
-}
+// Validate version strings
+version.raw || die(`Please provide a version number. ${constants.emoji.warning}`)
+version.validRegEx.test(version.raw) || die(`Usage: setVersion <version> [args] ${constants.emoji.warning} `)
 
-/**
- * Error messages
- */
-version.raw || die(`Please provide a version number. ${emoji.warning}`)
-version.validRegEx.test(version.raw) || die(`Usage: setVersion <version> [args] ${emoji.warning} `)
-version.core = version.raw.replace(version.validRegEx, replacer)
+// The core string contains to extended semVer symbols. Eg, 1.1.1 format only.
+version.core = version.raw.replace(version.validRegEx, coreReplacer)
+
+// Stripped is the core string without periods
 version.stripped = version.core.split('.').join('')
 
 if (commandLineFlags.dryRun.set) {
-    console.log(version);
-    die()
+    console.log(version)
+    die('No changes applied.')
 }
 
 const locations = createLocations(version, packageJson)
@@ -74,7 +73,7 @@ try {
 
         const result = replace.sync(location)
 
-        result[0]?.file || out(`Could not find file: ${location.files} ${emoji.warning} `)
+        result[0]?.file || out(`Could not find file: ${location.files} ${constants.emoji.warning} `)
 
         if (result[0]?.hasChanged) {
             changes++
@@ -86,15 +85,15 @@ try {
     })
 
     if (locations.length > changes && changes !== 0) {
-        out(`One or more files were not changed. Run with -d flag for debug log. ${emoji.warning}`)
+        out(`One or more files were not changed. Run with -d flag for debug log. ${constants.emoji.warning}`)
     } else if (changes === 0) {
         if (packageJson.version === version.raw) {
-            out(`Version is already ${version.raw} ${emoji.warning}  `)
+            out(`Version is already ${version.raw} ${constants.emoji.warning}  `)
         } else {
-            out(`No files changed. Run with -d flag for debug log. ${emoji.warning} `)
+            out(`No files changed. Run with -d flag for debug log. ${constants.emoji.warning} `)
         }
     } else if (changes === locations.length) {
-        out(`${packageJson.name}: ${packageJson.version}: ==> ${version.raw} ${emoji.check} `)
+        out(`${packageJson.name}: ${packageJson.version}: ==> ${version.raw} ${constants.emoji.check} `)
     }
 
 } catch (e) {
