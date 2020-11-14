@@ -5,9 +5,12 @@ import {constants} from './constants.js'
  * @param version
  * @param packageJson
  * @param platform
+ * @param config
  * @returns Array
  */
-export const createLocations = (version, packageJson, platform = null) => {
+export const createLocations = (version, packageJson, platform = null, config) => {
+
+    const iosProjectName = config.iosProjectName || packageJson.name
 
     const allLocations = [
         {
@@ -23,7 +26,7 @@ export const createLocations = (version, packageJson, platform = null) => {
             platform: constants.platform.android
         },
         {
-            files: `./ios/${packageJson.name}.xcodeproj/project.pbxproj`,
+            files: `./ios/${iosProjectName}.xcodeproj/project.pbxproj`,
             from: new RegExp('MARKETING_VERSION = [0-9, .]+', 'g'),
             to: `MARKETING_VERSION = ${version.core}`,
             platform: constants.platform.ios

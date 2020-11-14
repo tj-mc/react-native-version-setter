@@ -6,12 +6,16 @@ import {getPlatformConstant} from "./getPlatformConstant";
 import {createVersion} from "./createVersion";
 import {mutateFiles} from "./mutateFiles";
 import {createCliFlags} from "./createCliFlags";
+import {readConfig} from "./readConfig";
 
 // Read package.json
 const packageJson = readPackageJson() || die('Could not read package.json.')
 
 // Create and check for all CLI flags
 const commandLineFlags = createCliFlags()
+
+// Read config file
+const config = readConfig(commandLineFlags)
 
 // Create the version object
 const version = createVersion(process.argv[2])
@@ -20,7 +24,7 @@ const version = createVersion(process.argv[2])
 const platform = getPlatformConstant(commandLineFlags)
 
 // Get locations for specified version, or all if no version is specified
-const locations = createLocations(version, packageJson, platform)
+const locations = createLocations(version, packageJson, platform, config)
 
 // If dryRun is set, just print versions
 commandLineFlags.dryRun.set && logDie(version, 'No changes applied.')
