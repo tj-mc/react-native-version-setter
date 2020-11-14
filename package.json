@@ -1,14 +1,14 @@
 {
 	"name": "react-native-version-setter",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "Update your app version with a single command.",
 	"homepage": "https://www.github.com/tj-mc/react-native-version-setter",
-	"main": "lib/index.js",
+	"main": "build/setVersion.js",
 	"scripts": {
-		"build": "babel src -d lib"
+		"build": "babel src -d build"
 	},
 	"bin": {
-		"setVersion": "./lib/setVersion.js"
+		"setVersion": "./build/setVersion.js"
 	},
 	"keywords": [
 		"version",
