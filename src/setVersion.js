@@ -20,6 +20,14 @@ const commandLineFlags = {
     dryRun: {
         argument: '-r',
         set: false
+    },
+    iosOnly: {
+        argument: '-ios',
+        set: false
+    },
+    androidOnly: {
+        argument: '-android',
+        set: false
     }
 }
 
@@ -64,6 +72,7 @@ if (commandLineFlags.dryRun.set) {
     die('No changes applied.')
 }
 
+// Get locations for specified version, or all if no version is specified
 const locations = createLocations(version, packageJson)
 
 let changes = 0
