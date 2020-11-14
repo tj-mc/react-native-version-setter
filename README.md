@@ -43,19 +43,35 @@ $: npm run setVersion 1.20200909.1
 In most cases it makes sense to use conventional [semantic versioning.](https://semver.org/spec/v2.0.0.html)
 
 From version 2, RNVS has full support for extended semVer syntax, like `1.2.3-alpha`. These symbols are not supported on iOS, 
-so they are stripped out automatically. They will be inserted normal into android files and `package.json`. 
+so they are stripped out automatically. They will be inserted as normal into android files and `package.json`. 
 
 ## ⛳ Flags 
 `-d`: Runs with debug logging.
 
 `-r`: Prepares version strings, but logs to console instead of writing to file. 
 
+`-android`: Set version for android only
+
+`-ios`: Set version for iOS only
+
+## ⚙️ Config
+In most cases you won't need any config at all, but creating a `.rnvs.json` file in your project root will expose some extra options. Below are all accepted properties with example values.
+```
+{
+  // RNVS uses the project name 
+  // in package.json by default,
+  // But your ios project name might differ.
+  "iosProjectName": "MyApp"
+}
+```
+
+
 ## 💻 Compatibility
 - Compatible with iOS projects using Xcode 11+
 
 ## 🗺️ Roadmap
 - getVersion command
-- setVersion per-platform 
+- setVersion per-platform ✅ v2.1.0
 
 ## 👋 Troubleshooting
 #### Version setting not working on new project
