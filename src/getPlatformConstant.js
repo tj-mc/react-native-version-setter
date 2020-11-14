@@ -14,6 +14,6 @@ export const getPlatformConstant = cliArgs => {
     }
 
     if (cliArgs.iosOnly.set) return constants.platform.ios
-    if (cliArgs.androidOnly.set) return constants.platform.ios
+    if (cliArgs.androidOnly.set) return constants.platform.android
 
 }

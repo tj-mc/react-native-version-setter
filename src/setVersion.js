@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {out, die, cliArgumentExists} from "./process.js";
+import {die} from "./process.js";
 import {readPackageJson} from "./readPackageJson.js";
 import {createLocations} from "./createLocations.js";
 import {constants} from "./constants";
@@ -7,41 +7,19 @@ import {getPlatformConstant} from "./getPlatformConstant";
 import {coreReplacer} from "./coreReplacer";
 import {createVersion} from "./createVersion";
 import {mutateFiles} from "./mutateFiles";
+import {createCliFlags} from "./createCliFlags";
 
-const packageJson = readPackageJson()
-packageJson || die('Could not read package.json.')
+// Read package.json
+const packageJson = readPackageJson() || die('Could not read package.json.')
 
-// All possible command line flags
-const commandLineFlags = {
-    debugLog: {
-        argument: '-d',
-        set: false
-    },
-    dryRun: {
-        argument: '-r',
-        set: false
-    },
-    iosOnly: {
-        argument: '-ios',
-        set: false
-    },
-    androidOnly: {
-        argument: '-android',
-        set: false
-    }
-}
-
-// Loop through the commandLineFlags array,
-// searching for a symbol in the command line
-Object.keys(commandLineFlags).forEach(key => {
-    commandLineFlags[key].set = cliArgumentExists(commandLineFlags[key].argument)
-})
+// Create and check for all CLI flags
+const commandLineFlags = createCliFlags()
 
 // Create the version object
 const version = createVersion(process.argv[2])
 
 // Validate version strings
-version.raw || die(`Please provide a version number. ${constants.emoji.warning}`)
+                        version.raw  || die(`Please provide a version number. ${constants.emoji.warning}`)
 version.validRegEx.test(version.raw) || die(`Usage: setVersion <version> [args] ${constants.emoji.warning} `)
 
 // The core string contains to extended semVer symbols. Eg, 1.1.1 format only.
