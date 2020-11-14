@@ -1,10 +1,11 @@
-/**
- * Use CLI arguments to determined the
- * correct platform constant
- */
 import {constants} from "./constants";
 import {out} from "./process";
 
+/**
+ * Convert CLI arguments to a constant string
+ * @param cliArgs
+ * @returns {string}
+ */
 export const getPlatformConstant = cliArgs => {
 
     if (cliArgs.iosOnly.set && cliArgs.androidOnly.set) {

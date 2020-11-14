@@ -4,14 +4,14 @@ import {readPackageJson} from "./readPackageJson.js";
 import {createLocations} from "./createLocations.js";
 import {constants} from "./constants";
 import {getPlatformConstant} from "./getPlatformConstant";
+import {coreReplacer} from "./coreReplacer";
 const replace = require('replace-in-file');
 
 const packageJson = readPackageJson()
 packageJson || die('Could not read package.json.')
 
-/**
- * All possible command line flags
- */
+
+// All possible command line flags
 const commandLineFlags = {
     debugLog: {
         argument: '-d',
@@ -31,30 +31,16 @@ const commandLineFlags = {
     }
 }
 
-/**
- * Loop through the commandLineFlags array,
- * searching for a symbol in the command line
- * call
- */
+// Loop through the commandLineFlags array,
+// searching for a symbol in the command line
 Object.keys(commandLineFlags).forEach(key => {
     commandLineFlags[key].set = cliArgumentExists(commandLineFlags[key].argument)
 })
 
-
-/**
- * Check for valid version strings.
- */
 const version = {
-    validRegEx: /^([0-9, .]+)([-+][a-z0-9]+)?$/,
-                                      // Semantic Versioning 2.0
+    validRegEx: /^([0-9, .]+)([-+][a-z0-9]+)?$/, // Semantic Versioning 2.0
     raw: process.argv[2]              // The raw input version string
 }
-
-/**
- * Replacer function to strip beta/rc from ios versions.
- * Strips away second match.
- */
-const coreReplacer = (match, p1, p2, offset, string) => p1
 
 // Validate version strings
 version.raw || die(`Please provide a version number. ${constants.emoji.warning}`)

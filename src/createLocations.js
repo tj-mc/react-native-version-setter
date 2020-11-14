@@ -1,5 +1,12 @@
 import {constants} from './constants.js'
 
+/**
+ * Create the location objects for find and replace.
+ * @param version
+ * @param packageJson
+ * @param platform
+ * @returns Array
+ */
 export const createLocations = (version, packageJson, platform = null) => {
 
     const allLocations = [
@@ -41,7 +48,6 @@ export const createLocations = (version, packageJson, platform = null) => {
             return allLocations.filter(location => location.platform === constants.platform.ios)
 
         case constants.platform.universal:
-
         default:
             return allLocations
     }
