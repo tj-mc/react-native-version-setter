@@ -33,10 +33,15 @@ export const createLocations = (version, packageJson, platform = null) => {
      * If a platform was passed, find the locations for that platform.
      */
     switch (platform) {
+
         case constants.platform.android:
             return allLocations.filter(location => location.platform === constants.platform.android)
+
         case constants.platform.ios:
             return allLocations.filter(location => location.platform === constants.platform.ios)
+
+        case constants.platform.universal:
+
         default:
             return allLocations
     }

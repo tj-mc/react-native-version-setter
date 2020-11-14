@@ -3,7 +3,7 @@ import {out, die, cliArgumentExists} from "./process.js";
 import {readPackageJson} from "./readPackageJson.js";
 import {createLocations} from "./createLocations.js";
 import {constants} from "./constants";
-
+import {getPlatformConstant} from "./getPlatformConstant";
 const replace = require('replace-in-file');
 
 const packageJson = readPackageJson()
@@ -41,7 +41,6 @@ Object.keys(commandLineFlags).forEach(key => {
 })
 
 
-
 /**
  * Check for valid version strings.
  */
@@ -72,8 +71,11 @@ if (commandLineFlags.dryRun.set) {
     die('No changes applied.')
 }
 
+// Use CLI args to determine the correct platform constant
+const platform = getPlatformConstant(commandLineFlags)
+
 // Get locations for specified version, or all if no version is specified
-const locations = createLocations(version, packageJson)
+const locations = createLocations(version, packageJson, platform)
 
 let changes = 0
 
