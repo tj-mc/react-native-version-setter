@@ -20,7 +20,7 @@ export const createLocations = (version, packageJson, platform = null, config) =
                 new RegExp('versionName "([0-9, .])+([-+][a-z0-9]+)?"')
             ],
             to: [
-                `versionCode ${version.stripped}`,
+                `versionCode ${version.code}`,
                 `versionName "${version.raw}"`
             ],
             platform: constants.platform.android
