@@ -74,10 +74,6 @@ function versionCode(rawVersion) {
         // Leaves room for other build-types, but release is highest (9)
     }
 
-    console.log("typestr", typeStr)
-
-    console.log(dotSplit)
-
     const out = (major * majorDigit) + (minor * minorDigit) + (patch * patchDigit) + (type * typeDigit);
     if (out > 2100000000) { // Reference: https://medium.com/dipien/versioning-android-apps-d6ec171cfd82
         throw new Error("versionCode is larger than Google Play allows")

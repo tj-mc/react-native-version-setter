@@ -1,4 +1,4 @@
-import {cliArgumentExists} from ".process";
+import {cliArgumentExists} from "./process";
 
 const flags = [
     {

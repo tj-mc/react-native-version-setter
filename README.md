@@ -16,13 +16,8 @@ ios/{projectName}.xcodeproj/project.pbxproj MARKETING_VERSION
 package.json "version"
 ```
 
-## 🌐 Install
-npm: ```npm i react-native-version-setter```
-
-yarn: ```yarn add react-native-version-setter```
-
 ## 🚀 Usage
-Simply call `npm run setVersion` or `yarn run setVersion` in your project root.
+Simply call `npx react-native-version-setter [version]` in your project root.
 
 ```
 $: npm run setVersion 1.2.0
@@ -33,13 +28,6 @@ $: npm run setVersion 1.2.0
 ```
 
 ## 👩‍💻 Freeform Versioning
-RNVS does not impose restrictions on versioning style. 
-Feel free set your version numbers in whatever format works for you. For example, Date-based versioning:
-```
-$: npm run setVersion 1.20200909.1
-[RNVS] MyApp: 1.0.0: ==> 1.20200909.1 ✅ 
-```
-
 In most cases it makes sense to use conventional [semantic versioning.](https://semver.org/spec/v2.0.0.html)
 
 From version 2, RNVS has full support for extended semVer syntax, like `1.2.3-alpha`. These symbols are not supported on iOS, 

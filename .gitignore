@@ -5,3 +5,4 @@ package-lock.json
 lib/
 android
 ios
+.DS_Store
